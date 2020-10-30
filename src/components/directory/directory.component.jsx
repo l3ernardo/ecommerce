@@ -7,7 +7,7 @@ import MenuItem from '../menu-item/menu-item.component'
 const Directory = () => {
 
 
-    const [section, setSection] = useState(sectionData)
+    const [section] = useState(sectionData)
 
     return (
 

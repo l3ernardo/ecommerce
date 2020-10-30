@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+
+import { auth, signInWithGoogle } from '../../../utils/firebase/firebase.utils';
+
+
 import FormInput from '../../../components/form-input/form-input.component';
 import Button from '../../../components/button/button-component';
 import './sign-in.styles.scss';
@@ -16,8 +20,14 @@ class Signin extends Component {
 
     handleSubmit = (evt) => {
         evt.preventDefault();
-        this.setState({email: "", password: ""})
-        console.log(this.state)
+
+        const {email, password } = this.state;
+        try{
+            auth.signInWithEmailAndPassword(email, password)
+            this.setState({email: "", password: ""})
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     HandleInput = (evt) => {
@@ -51,11 +61,13 @@ class Signin extends Component {
                         required 
                     />
 
-                    <Button 
-                        type="submit" 
-                        value="submit"
-                    > Sign in</Button>
+                    <div className='buttons'>
+                        <Button type='submit'> Sign in </Button>
 
+                        <Button onClick={signInWithGoogle} googleSignIn>
+                            Sign in with Google
+                        </Button>
+                    </div>
                 </form>
             </div>
         )

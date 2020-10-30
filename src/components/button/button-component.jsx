@@ -3,9 +3,9 @@ import React from 'react';
 import './button.styles.scss';
 
 
-function Button({children, otherProps}) {
+function Button({children, googleSignIn, ...otherProps}) {
     return (
-        <button className="custom-button" {...otherProps}>
+        <button className={`${ googleSignIn ? 'googleSignIn' : ''} custom-button `} {...otherProps}>
             {children}
         </button>
     )
